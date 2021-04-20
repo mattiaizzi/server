@@ -21,9 +21,9 @@ app.get("/users", async (req, res, next) => {
   });
 
 app.get("/users/:id", async (req, res, next) => {
-  const id = req.params.id;
+  const id = parseInt(req.params.id, 10);
   const user = users.find(u => u.id === id);
-  return res.status(200).json(user);
+  return user ? res.status(200).json(user) : res.status(404).statusMessage("no user found");
 });
 
 app.post("/users", async (req, res, next) => {
